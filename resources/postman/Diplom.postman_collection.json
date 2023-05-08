@@ -1,0 +1,667 @@
+{
+	"info": {
+		"_postman_id": "7c9582aa-16ca-4937-bb80-60e2cd224620",
+		"name": "Diplom",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18691735",
+		"_collection_link": "https://aitilium.postman.co/workspace/test-for-diplom~83d1d251-8681-4096-9fbc-7b91120ae557/collection/18691735-7c9582aa-16ca-4937-bb80-60e2cd224620?action=share&creator=18691735&source=collection_link"
+	},
+	"item": [
+		{
+			"name": "create-company",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "",
+						"value": "",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "SuperCompany 2000",
+							"type": "text"
+						},
+						{
+							"key": "address",
+							"value": "SPB, yl. Petrova",
+							"type": "text"
+						},
+						{
+							"key": "phone",
+							"value": "5553535",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "yyy@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/companies",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-department",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "title",
+							"value": "Бухгалтерия",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/departments",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-worker",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "bbb@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "company_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "department_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/workers",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"workers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-admin",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "worker_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/admins",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"admins"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-admin-departments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "admin_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "department_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/admin_departments",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"admin_departments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-department-subdepartments",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "department_id",
+							"value": "1",
+							"type": "text"
+						},
+						{
+							"key": "subdepartment_id",
+							"value": "2",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/department_subdepartments",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"department_subdepartments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "email",
+							"value": "86nootka36@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "xxxR34*jkl",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/login",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "logout-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/logout",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "register-user",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "Andrew",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "86nootka@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "xxxR34*jkl",
+							"type": "text"
+						},
+						{
+							"key": "password_confirmation",
+							"value": "xxxR34*jkl",
+							"type": "text"
+						},
+						{
+							"key": "role_id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/register",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create-role",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "name",
+							"value": "user",
+							"type": "text"
+						},
+						{
+							"key": "redirect_to",
+							"value": "/home",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "Пользователи",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BaseUrl}}/api/roles",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"roles"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "create-role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "user",
+									"type": "text"
+								},
+								{
+									"key": "redirect_to",
+									"value": "/home",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Пользователи",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/roles",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:14:48 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:14:48 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.5"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"user\",\n    \"redirect_to\": \"/home\",\n    \"updated_at\": \"2023-05-08T01:14:47.000000Z\",\n    \"created_at\": \"2023-05-08T01:14:47.000000Z\",\n    \"id\": 1\n}"
+				},
+				{
+					"name": "create-role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "company",
+									"type": "text"
+								},
+								{
+									"key": "redirect_to",
+									"value": "/company",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Компании",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/roles",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:17:42 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:17:42 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.5"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"company\",\n    \"redirect_to\": \"/company\",\n    \"updated_at\": \"2023-05-08T01:17:40.000000Z\",\n    \"created_at\": \"2023-05-08T01:17:40.000000Z\",\n    \"id\": 2\n}"
+				},
+				{
+					"name": "create-role",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "redirect_to",
+									"value": "/admin",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Администраторы",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BaseUrl}}/api/roles",
+							"host": [
+								"{{BaseUrl}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Host",
+							"value": "localhost:8080"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:19:01 GMT"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 08 May 2023 01:19:01 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "PHP/8.2.5"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, private"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "X-RateLimit-Limit",
+							"value": "60"
+						},
+						{
+							"key": "X-RateLimit-Remaining",
+							"value": "59"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"name\": \"admin\",\n    \"redirect_to\": \"/admin\",\n    \"updated_at\": \"2023-05-08T01:19:00.000000Z\",\n    \"created_at\": \"2023-05-08T01:19:00.000000Z\",\n    \"id\": 3\n}"
+				}
+			]
+		},
+		{
+			"name": "get-role",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BaseUrl}}/api/get-role",
+					"host": [
+						"{{BaseUrl}}"
+					],
+					"path": [
+						"api",
+						"get-role"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BaseUrl",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
