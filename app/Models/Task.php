@@ -5,17 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Role extends Model
+class Task extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
-        'redirect_to',
+        'title',
+        'description',
     ];
-
-    public function users()
-    {
-        return $this->hasMany(User::class);
-    }
 }
