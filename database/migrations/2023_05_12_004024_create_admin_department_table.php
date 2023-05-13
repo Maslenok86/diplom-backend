@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->integer('role_id')->default(0);
+        Schema::create('admin_department', function (Blueprint $table) {
+            $table->foreignId('admin_id')->constrained('admins')->onDelete('cascade');
+		    $table->foreignId('department_id')->constrained('departments')->onDelete('cascade');
+
+            $table->unique(['admin_id', 'department_id']);
         });
     }
 
@@ -21,8 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role_id');
-        });
+        Schema::dropIfExists('admin_department');
     }
 };
