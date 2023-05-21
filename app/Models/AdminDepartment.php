@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class AdminDepartment extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'admin_id',
+        'department_id',
+    ];
+
+    public $timestamps = false;
 }
