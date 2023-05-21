@@ -13,6 +13,7 @@ class Department extends Model
         'title',
         'description',
         'company_id',
+        'parent_id',
     ];
 
     public $timestamps = false;

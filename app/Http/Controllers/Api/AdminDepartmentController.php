@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Models\Role;
+use App\Http\Controllers\Controller;
+use App\Models\AdminDepartment;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class AdminDepartmentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,42 +17,23 @@ class RoleController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create(Request $request)
-    {
-        $role = new Role();
-        $role->name = $request->name;
-        $role->redirect_to = $request->redirect_to;
-        if($role->description){
-            $role->description = $request->description;
-        }
-
-        $role->save();
-
-        return response()->json($role);
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
-        //
+        $adminDepartment = new AdminDepartment();
+        $adminDepartment->fill($request->post());
+
+        // dd($adminDepartment);
+        $adminDepartment->save();
+
+        return response()->json($adminDepartment);
     }
 
     /**
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
     {
         //
     }

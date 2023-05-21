@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\Api\CompanyController;
 use App\Http\Controllers\Api\DepartmentController;
 use App\Http\Controllers\Api\Auth\RegistrationController;
 use App\Http\Controllers\Api\Auth\LoginController;
+use App\Http\Controllers\Api\TaskController;
+use App\Http\Controllers\Api\AdminController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,16 +20,19 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-Route::post('/roles', [RoleController::class, 'create'])->name('createRole');
-Route::get('/get-role', [UserController::class, 'getRole'])->name('getRole');
 Route::post('/registration', [RegistrationController::class, 'registration'])->name('registration');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
-Route::resources([
-    'companies' => CompanyController::class,
-    'companies.departments' => DepartmentController::class,
-]);
 
+Route::middleware('auth:sanctum')->group(function (){
+    Route::resources([
+        'companies' => CompanyController::class,
+        'companies.departments' => DepartmentController::class,
+        'tasks' => TaskController::class,
+        'admins' => AdminController::class,
+        'admin-department' => AdminController::class,
+    ]);
+});

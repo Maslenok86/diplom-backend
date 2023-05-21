@@ -15,6 +15,7 @@ class Company extends Model
         'phone',
         'email',
         'description',
+        'user_id',
     ];
 
     public $timestamps = false;
@@ -22,4 +23,8 @@ class Company extends Model
     public function departments(){
         return $this->hasMany(Department::class);
     }
+
+    // public function admins(){
+    //     return $this->hasMany(Department::class);
+    // }
 }

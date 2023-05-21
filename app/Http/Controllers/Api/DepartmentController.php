@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Enums\RoleEnums;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
@@ -22,6 +23,12 @@ class DepartmentController extends Controller
      */
     public function store(Company $company, Request $request)
     {
+        if(!$this->isRole(RoleEnums::ROLE_COMPANY)){
+            return response()->json([
+                'message' => 'Denied!',
+                'status' => 403
+            ]);
+        }
         $department = new Department();
         $department->fill($request->post());
 

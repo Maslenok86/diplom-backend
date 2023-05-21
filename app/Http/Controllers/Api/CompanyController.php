@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
+use App\Services\CompanyService;
 
 class CompanyController extends Controller
 {
@@ -14,6 +15,7 @@ class CompanyController extends Controller
     public function index()
     {
         return response()->json(Company::all());
+        //Company::where(['user_id' => Auth::user()->id])->first();
     }
 
     /**
@@ -34,7 +36,10 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        return response()->json($company);
+        $departments=$company->departments;;
+        $companyService = new CompanyService();
+
+        return response()->json($companyService->getDepartmentsTree((array)$departments));
     }
 
     /**
