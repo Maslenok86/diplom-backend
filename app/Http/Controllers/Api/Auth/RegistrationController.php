@@ -33,6 +33,9 @@ class RegistrationController extends BaseController
             $admin = Admin::create([
                 'user_id' => $user->id,
             ]);
+
+            $user->company_id = Auth::user()->company_id;
+            $user->save();
         }
         if ($user->role_id == RoleEnums::ROLE_EMPLOYEE) {
             // Создаем сотрудника
@@ -40,6 +43,9 @@ class RegistrationController extends BaseController
                 'user_id' => $user->id,
                 'department_id' => $request['department_id'],
             ]);
+            
+            $user->company_id = Auth::user()->company_id;
+            $user->save();
         }
         if ($user->role_id == RoleEnums::ROLE_COMPANY) {
             // Создаем компанию
@@ -50,6 +56,9 @@ class RegistrationController extends BaseController
                 'phone' => $request['company_phone'],
                 'email' => $request['company_email'],
             ]);
+
+            $user->company_id = $company->id;
+            $user->save();
 
             Auth::guard('company')->login($user);
             $token = $user->createToken('token-company')->plainTextToken;
