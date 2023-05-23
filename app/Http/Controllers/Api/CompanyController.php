@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Company;
 use App\Services\CompanyService;
+use Illuminate\Support\Facades\Auth;
 
 class CompanyController extends Controller
 {
@@ -64,5 +65,10 @@ class CompanyController extends Controller
             'message' => 'Success!',
             'status' => 200
         ]);
+    }
+
+    public function getUsers(Company $company, Request $request)
+    {
+        return response()->json($company->users);
     }
 }

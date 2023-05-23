@@ -35,4 +35,5 @@ Route::middleware('auth:sanctum')->group(function (){
         'admins' => AdminController::class,
         'admin-department' => AdminController::class,
     ]);
+    Route::get('/companies/{company}/get-users', [CompanyController::class, 'getUsers'])->name('companies.getUsers');
 });
