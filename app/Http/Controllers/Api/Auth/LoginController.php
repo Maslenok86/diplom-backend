@@ -28,24 +28,30 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
-            if($user->role_id == RoleEnums::ROLE_ADMIN){
+            if ($user->role_id == RoleEnums::ROLE_ADMIN) {
                 Auth::guard('admin')->login($user);
                 $token = $user->createToken('token-admin')->plainTextToken;
+                $newToken = explode("|", $token);
+                $newToken = end($newToken);
                 $userObject = Admin::where(['user_id' => $user->id])->first();
             }
-            if($user->role_id == RoleEnums::ROLE_EMPLOYEE){
+            if ($user->role_id == RoleEnums::ROLE_EMPLOYEE) {
                 Auth::guard('employee')->login($user);
                 $token = $user->createToken('token-employee')->plainTextToken;
+                $newToken = explode("|", $token);
+                $newToken = end($newToken);
                 $userObject = Employee::where(['user_id' => $user->id])->first();
             }
-            if($user->role_id == RoleEnums::ROLE_COMPANY){
+            if ($user->role_id == RoleEnums::ROLE_COMPANY) {
                 Auth::guard('company')->login($user);
                 $token = $user->createToken('token-company')->plainTextToken;
+                $newToken = explode("|", $token);
+                $newToken = end($newToken);
                 $userObject = $user->company;
             }
 
             return response()->json([
-                'token' => $token,
+                'token' => $newToken,
                 'user' => $this->getUser($user),
                 'user_object' => $userObject,
             ]);
@@ -60,14 +66,14 @@ class LoginController extends Controller
     private function getUser(User $user)
     {
         return [
-            'id'=> $user->id,
-            'name'=> $user->name,
-            'surname'=> null,
-            'middlename'=> null,
-            'email'=> $user->email,
-            'role_id'=> $user->role_id,
-            'phone'=> $user->phone,
-            'description'=> $user->description,
+            'id' => $user->id,
+            'name' => $user->name,
+            'surname' => null,
+            'middlename' => null,
+            'email' => $user->email,
+            'role_id' => $user->role_id,
+            'phone' => $user->phone,
+            'description' => $user->description,
         ];
     }
 }

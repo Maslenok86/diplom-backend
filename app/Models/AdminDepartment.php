@@ -14,5 +14,5 @@ class AdminDepartment extends Model
         'department_id',
     ];
 
-    public $timestamps = false;
+    //public $timestamps = false;
 }

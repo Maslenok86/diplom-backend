@@ -18,9 +18,9 @@ class RegistrationController extends BaseController
 {
     public function registration(RegisterRequest $request)
     {
-        if(!$request->validate()){
-            return $request;
-        }
+        // if(!$request->validate()){
+        //     return $request;
+        // }
         $user = User::create([
             'name' => $request['name'],
             'email' => $request['email'],
@@ -28,20 +28,20 @@ class RegistrationController extends BaseController
             'role_id' => $request['role_id'],
         ]);
 
-        if($user->role_id == RoleEnums::ROLE_ADMIN){
+        if ($user->role_id == RoleEnums::ROLE_ADMIN) {
             // Создаем админа
             $admin = Admin::create([
                 'user_id' => $user->id,
             ]);
         }
-        if($user->role_id == RoleEnums::ROLE_EMPLOYEE){
+        if ($user->role_id == RoleEnums::ROLE_EMPLOYEE) {
             // Создаем сотрудника
             $employee = Employee::create([
                 'user_id' => $user->id,
                 'department_id' => $request['department_id'],
             ]);
         }
-        if($user->role_id == RoleEnums::ROLE_COMPANY){
+        if ($user->role_id == RoleEnums::ROLE_COMPANY) {
             // Создаем компанию
             $company = Company::create([
                 'user_id' => $user->id,
@@ -52,14 +52,16 @@ class RegistrationController extends BaseController
             ]);
 
             Auth::guard('company')->login($user);
-                $token = $user->createToken('token-company')->plainTextToken;
-                $userObject = $user->company;
+            $token = $user->createToken('token-company')->plainTextToken;
+            $newToken = explode("|", $token);
+            $newToken = end($newToken);
+            $userObject = $user->company;
 
-                return response()->json([
-                    'token' => $token,
-                    'user' => $this->getUser($user),
-                    'user_object' => $userObject,
-                ]);
+            return response()->json([
+                'token' => $newToken,
+                'user' => $this->getUser($user),
+                'user_object' => $userObject,
+            ]);
         }
         return;
     }
@@ -67,14 +69,14 @@ class RegistrationController extends BaseController
     private function getUser(User $user)
     {
         return [
-            'id'=> $user->id,
-            'name'=> $user->name,
-            'surname'=> null,
-            'middlename'=> null,
-            'email'=> $user->email,
-            'role_id'=> $user->role_id,
-            'phone'=> $user->phone,
-            'description'=> $user->description,
+            'id' => $user->id,
+            'name' => $user->name,
+            'surname' => null,
+            'middlename' => null,
+            'email' => $user->email,
+            'role_id' => $user->role_id,
+            'phone' => $user->phone,
+            'description' => $user->description,
         ];
     }
 }

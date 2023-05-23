@@ -31,7 +31,7 @@ Route::middleware('auth:sanctum')->group(function (){
     Route::resources([
         'companies' => CompanyController::class,
         'companies.departments' => DepartmentController::class,
-        'tasks' => TaskController::class,
+        'companies.tasks' => TaskController::class,
         'admins' => AdminController::class,
         'admin-department' => AdminController::class,
     ]);

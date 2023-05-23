@@ -24,6 +24,10 @@ class Company extends Model
         return $this->hasMany(Department::class);
     }
 
+    public function tasks(){
+        return $this->hasMany(Task::class);
+    }
+    
     // public function admins(){
     //     return $this->hasMany(Department::class);
     // }

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
 use App\Models\Company;
-
+use App\Services\TaskService;
 
 class TaskController extends Controller
 {
@@ -23,12 +23,13 @@ class TaskController extends Controller
      */
     public function store(Company $company, Request $request)
     {
-        $task = new Task();
-        $task->fill($request->post());
+        $parentTask = new Task();
+        $parentTask->fill($request->post());
 
-        $task->save();
+        $childrenTask = $request->children;
+        $taskService = new TaskService();
 
-        return response()->json($task);
+        return response()->json($taskService->createTask($parentTask, $childrenTask));
     }
 
     /**
@@ -36,7 +37,10 @@ class TaskController extends Controller
      */
     public function show(Company $company, Task $task)
     {
-        return response()->json($task);
+        $tasks = $company->tasks;
+        $taskService = new TaskService();
+        
+        return response()->json($taskService->getTasksTree((array)$tasks));
     }
 
     /**
