@@ -36,7 +36,7 @@ class CompanyController extends Controller
      */
     public function show(Company $company)
     {
-        $departments=$company->departments;;
+        $departments = $company->departments;
         $companyService = new CompanyService();
 
         return response()->json($companyService->getDepartmentsTree((array)$departments));

@@ -21,9 +21,9 @@ class Admin extends Model
         return $this->hasMany(TaskStatus::class);
     }
 
-    public function adminDepartments(){
-        return $this->hasMany(AdminDepartment::class);
-    }
+    // public function adminDepartments(){
+    //     return $this->hasMany(AdminDepartment::class);
+    // }
 
     public function departments(){
         return $this->belongsToMany(Department::class,'admin_department');
