@@ -6,7 +6,7 @@ use App\Http\Controllers\Api\Auth\RegistrationController;
 use App\Http\Controllers\Api\Auth\LoginController;
 use App\Http\Controllers\Api\TaskController;
 use App\Http\Controllers\Api\AdminController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\TaskStatusController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,13 +27,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('/registration', [RegistrationController::class, 'registration'])->name('registration');
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 
-Route::middleware('auth:sanctum')->group(function (){
+Route::middleware('auth:sanctum')->group(function () {
     Route::resources([
         'companies' => CompanyController::class,
         'companies.departments' => DepartmentController::class,
         'companies.tasks' => TaskController::class,
         'admins' => AdminController::class,
-        'admin-department' => AdminController::class,
+        'task-statuses' => TaskStatusController::class,
     ]);
     Route::get('/companies/{company}/get-users', [CompanyController::class, 'getUsers'])->name('companies.getUsers');
+    Route::get('/get-employees-tasks', [TaskStatusController::class, 'getEmployeesTasks'])->name('employees.getTasks');
+    Route::get('/get-admins-tasks', [TaskStatusController::class, 'getAdminsTasks'])->name('admins.getTasks');
 });

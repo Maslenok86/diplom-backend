@@ -4,8 +4,43 @@ namespace App\Services;
 
 use App\Models\Task;
 
-class TaskService
+class TaskStatusService
 {
+    public function getTasksStatusesTree($employeeTaskStatuses)
+    {
+        $treeviewData = [];
+
+        $employeeTaskStatuses = array_shift($employeeTaskStatuses);
+
+        usort($employeeTaskStatuses, function ($a, $b) {
+            return $a['task_id'] <=> $b['task_id'];
+        });
+
+        $parentTaskStatus = array_shift($employeeTaskStatuses);
+
+        $taskInfo = Task::find($parentTaskStatus['task_id']);
+
+        $treeviewData = $parentTaskStatus;
+        $treeviewData['task_title'] = $taskInfo->title;
+        $treeviewData['task_description'] = $taskInfo->description;
+
+        $childrenTreeviewData = [];
+        foreach ($employeeTaskStatuses as $childTaskStatus) {
+
+            $taskInfo = Task::find($childTaskStatus['task_id']);
+
+            $childrenTaskStatus = $childTaskStatus;
+            $childrenTaskStatus['task_title'] = $taskInfo->title;
+            $childrenTaskStatus['task_description'] = $taskInfo->description;
+            $childrenTreeviewData[] = $childrenTaskStatus;
+        }
+        $treeviewData['children'] = $childrenTreeviewData;
+
+        return $treeviewData;
+    }
+
+
+
     public function getTasksTree($tasks)
     {
         $treeviewData = [];
@@ -55,30 +90,5 @@ class TaskService
             ];
         }
         return $treeviewData;
-    }
-
-    public function createTask($parent, $children)
-    {
-        $parentTask = new Task();
-        $parentTask = $parent;
-
-        $parentTask->save();
-
-        if ($children) {
-            foreach ($children as $child) {
-                $childTask = new Task();
-                $childTask->title = $child['title'];
-                $childTask->parent_id = $parentTask->id;
-                $childTask->description = (array_key_exists('description', $child) ? $child['description'] : null);
-                $childTask->company_id = $parentTask->company_id;
-
-                $childTask->save();
-            }
-        }
-
-        $tasksList = Task::where('id', $parentTask->id)->orWhere('parent_id', $parentTask->id)->get();
-
-        $tasksTree = $this->getTasksTree((array)$tasksList);
-        return $tasksTree;
     }
 }
