@@ -11,6 +11,7 @@ use App\Models\Admin;
 use App\Models\Employee;
 use App\Enums\RoleEnums;
 use App\Models\Company;
+use App\Models\Department;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
@@ -34,8 +35,13 @@ class RegistrationController extends BaseController
                 'user_id' => $user->id,
             ]);
 
-            $user->company_id = Auth::user()->company_id;
+            $user->company_id = $request['company_id'];
             $user->save();
+
+            foreach ($request['department_id'] as $departmentId) {
+                $department = Department::find($departmentId);
+                $admin->departments()->attach($department);
+            }
         }
         if ($user->role_id == RoleEnums::ROLE_EMPLOYEE) {
             // Создаем сотрудника
@@ -43,8 +49,8 @@ class RegistrationController extends BaseController
                 'user_id' => $user->id,
                 'department_id' => $request['department_id'],
             ]);
-            
-            $user->company_id = Auth::user()->company_id;
+
+            $user->company_id = $request['company_id'];
             $user->save();
         }
         if ($user->role_id == RoleEnums::ROLE_COMPANY) {

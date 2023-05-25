@@ -57,12 +57,4 @@ class AdminController extends Controller
             'status' => 200
         ]);
     }
-
-    public function addDepartment(Admin $admin)
-    {
-        $department = Department::find(1);
-        $admin->departments()->attach($department);
-
-        return response()->json(AdminDepartment::where(['admin_id' => $admin->id]));
-    }
 }
